@@ -1,0 +1,6 @@
+*.pyc 
+.env
+migrations/
+node_modules/
+db.sqlite3
+
