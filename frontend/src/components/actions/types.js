@@ -1,0 +1,1 @@
+export const GET_WORKSPACES = "GET_WORKSPACES"
