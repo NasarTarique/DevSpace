@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import cookie from "react-cookies";
+import { connect } from "react-redux";
+import {getAuthStatus} from "./actions/index"
 import axios from "axios";
 import {
   Center,
@@ -11,7 +14,7 @@ import {
   Heading,
 } from "@chakra-ui/react";
 
-function Login() {
+function Login(props) {
   const [userdetails, setUser] = useState({
     username: "",
     password: "",
@@ -23,12 +26,24 @@ function Login() {
         password: userdetails.password,
       })
       .then((response) => {
-        console.log(response.data);
+			  setUser({
+					  username: "",
+					  password: ""
+			  })
+        cookie.save("tokens", response.data.access);
+        cookie.save("refresh", response.data.refresh);
+			  props.getAuthStatus(true);
       });
   };
   return (
-    <Flex width="full"  height="90vh" align="center" justifyContent="center">
-			<Box p={6} width="300px" boxShadow="8px 8px 4px #00000011" bg="white" borderRadius="md">
+    <Flex width="full" height="90vh" align="center" justifyContent="center">
+      <Box
+        p={6}
+        width="300px"
+        boxShadow="8px 8px 4px #00000011"
+        bg="white"
+        borderRadius="md"
+      >
         <Box textAlign="center">
           <Heading color="teal.300">Login</Heading>
         </Box>
@@ -39,7 +54,9 @@ function Login() {
               onSubmit();
             }}
           >
+            {" "}
             <FormControl>
+              {" "}
               <FormLabel color="teal.800">Username</FormLabel>{" "}
               <Input
                 focusBorderColor="teal.200"
@@ -83,4 +100,15 @@ function Login() {
     </Flex>
   );
 }
-export default Login;
+
+const mapStateToProps = (state) => {
+  return {
+		  authorised: state.auth.auth,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+		  getAuthStatus: (data) => dispatch(getAuthStatus(data)),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -29,6 +29,8 @@
     "@emotion/styled": "^11.3.0",
     "axios": "^0.21.1",
     "framer-motion": "^4.1.17",
-    "react-beautiful-dnd": "^13.1.0"
+    "react-beautiful-dnd": "^13.1.0",
+    "react-cookies": "^0.1.1",
+    "redux-devtools-extension": "^2.13.9"
   }
 }

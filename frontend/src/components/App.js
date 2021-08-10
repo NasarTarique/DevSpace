@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { render } from "react-dom";
+import { Provider } from "react-redux";
 import { ChakraProvider, Box } from "@chakra-ui/react";
 import Home from "./Home";
-import Login from "./Login";
-import Nav from "./Nav";
+import store from "./store";
 
-function App() {
+function App(props) {
   return (
     <ChakraProvider>
-      <Box minH="100vh" bg="#f5f5f5">
-        <Nav />
-        <Login />
-      </Box>
+      <Provider store={store}>
+			  <Home />
+      </Provider>
     </ChakraProvider>
   );
-  // </Home>
 }
 export default App;
 const container = document.getElementById("app");

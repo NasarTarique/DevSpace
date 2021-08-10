@@ -1,4 +1,5 @@
 import axios from "axios"
+import {GET_USER_STATUS} from "./types"
 
 export function getWorkspace(){
 		return (dispatch) =>{
@@ -7,13 +8,13 @@ export function getWorkspace(){
 
 						})
 }
-export function getTopics(){
-		return (dispatch) =>{
-
-		}
 }
-export function getLinks(){
-		return (dispatch) =>{
 
+export function getAuthStatus(data){
+		return (dispatch) =>{
+				dispatch({
+						type:GET_USER_STATUS,
+						payload:data
+				})
 		}
 }

@@ -1,21 +1,20 @@
-import { GET_COOKIES } from "../actions/types";
+import { GET_USER_STATUS } from "../actions/types";
 
 const initialState = {
-		user : [],
-		tokens : {}
+		auth: false,
 };
 
-export default function(state=initialState, action){
-		switch(action.type){
-				case GET_COOKIES:
-						return {
-								...state,
-								tokens:  action.payload
-						}
-				default: 
-						return{
-								...state,
-								user = []
-						}
-		}
-};
+export default function (state = initialState, action) {
+  switch (action.type) {
+    case GET_USER_STATUS:
+      return {
+        ...state,
+			  auth: action.payload,
+      };
+    default:
+      return {
+        ...state,
+			  auth: false,
+      };
+  }
+}

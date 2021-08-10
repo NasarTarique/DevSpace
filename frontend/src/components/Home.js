@@ -1,9 +1,13 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { Center, Grid, Box, Flex, Button, Input } from "@chakra-ui/react";
+import { getAuthStatus } from "./actions/index"
+import {connect} from "react-redux";
 import { DragDropContext} from "react-beautiful-dnd";
 import Column from "./Column";
+import Login from "./Login";
+import Nav from "./Nav";
 
-function Home() {
+function Main(props) {
   return (
     <Grid w="90vw" margin="auto">
       <Center h="100px" w="100%" marginTop="50px">
@@ -44,4 +48,24 @@ function Home() {
     </Grid>
   );
 }
-export default Home;
+
+function Home(props){
+		return(
+        <Box minH="100vh" bg="#f5f5f5">
+          <Nav />
+				{props.authorised ? <Main /> : <Login />}
+        </Box>
+		)
+}
+const mapStateToProps = (state) =>{ 
+		return {
+				authorised : state.auth.auth
+		}
+}
+
+const mapDispatchToProps = (dispatch) => {
+		return {
+				getAuthStatus : (data) =>{getAuthStatus(data)}
+		}
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

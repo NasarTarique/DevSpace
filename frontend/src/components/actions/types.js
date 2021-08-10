@@ -1,1 +1,2 @@
-export const GET_WORKSPACES = "GET_WORKSPACES"
+export const GET_WORKSPACES = "GET_WORKSPACES";
+export const GET_USER_STATUS = "GET_USER_STATUS";
